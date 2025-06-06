@@ -1,4 +1,5 @@
 import { redirectToAuthCodeFlow, getAccessToken } from './authCode';
+import { almagify } from './almagify';
 
 const clientId = '2530caf9b51a43839f562d972477f96d';
 const params = new URLSearchParams(window.location.search);
@@ -18,6 +19,7 @@ if (!code) {
   populateBtn.addEventListener('click', async () => {
     playlist = await fetchTracks(accessToken);
     populateSongs(playlist, accessToken);
+    almagify(accessToken);
   });
 
   deleteBtn.addEventListener('click', async () => {
