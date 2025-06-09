@@ -1,35 +1,38 @@
 export async function almagify(token) {
-  // TODO: Build two sets of 10 tracks from list 1 and list 2
+  // Pull URIs from each playlist
 
-  // let playlist1 = fetchFromPlaylist1(token);
-
-  let playlist1 = await fetchFromPlaylist(
+  let playlist1 = await listify(
     'https://api.spotify.com/v1/playlists/1iQbsTFCLjRXa6q5NtDjOe/tracks',
     token
   );
 
-  let playlist2 = await fetchFromPlaylist(
+  let playlist2 = await listify(
     'https://api.spotify.com/v1/playlists/2M33mOGJeSPXkeOqUcKh3H/tracks',
     token
   );
 
-  console.log(playlist1);
-  console.log(playlist2);
+  // Pick 10 random songs from each and order them A B
 
-  // let playlist2 = fetchFromPlaylist2(token);
+  const almagifyList = [];
 
-  // TODO: Combine them in an A B pattern
+  for (let i = 0; i < 10; i++) {
+    almagifyList.push(playlist2[Math.floor(Math.random() * playlist2.length)]);
+    almagifyList.push(playlist1[Math.floor(Math.random() * playlist1.length)]);
+  }
+
+  console.log(almagifyList);
+  return almagifyList;
 }
 
-async function fetchFromPlaylist(url, token) {
+async function listify(url, token) {
   list = [];
 
-  const playlistPromise = await fetch(`${url}`, {
-    method: 'GET',
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  // const playlistPromise = await fetch(`${url}`, {
+  //   method: 'GET',
+  //   headers: { Authorization: `Bearer ${token}` },
+  // });
 
-  const playlistObj = await playlistPromise.json();
+  const playlistObj = await fetchTracks(token, url);
 
   const songs = playlistObj.items;
 
