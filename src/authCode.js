@@ -7,7 +7,7 @@ export async function redirectToAuthCodeFlow(clientId) {
   const params = new URLSearchParams();
   params.append('client_id', clientId);
   params.append('response_type', 'code');
-  params.append('redirect_uri', 'https://192.168.1.95:5173/');
+  params.append('redirect_uri', 'https://amalgify.netlify.app/');
   params.append(
     'scope',
     'user-read-private user-read-email playlist-read-private playlist-modify-private'
@@ -51,7 +51,7 @@ export async function getAccessToken(clientId, code) {
   const result = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params,
+    body: params
   });
 
   const { access_token } = await result.json();
