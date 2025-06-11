@@ -1,11 +1,11 @@
 import { redirectToAuthCodeFlow, getAccessToken } from './authCode';
-import { almagify } from './almagify';
+import { amalgify } from './amalgify';
 
 const clientId = '2530caf9b51a43839f562d972477f96d';
 const params = new URLSearchParams(window.location.search);
 const code = params.get('code');
 
-const almagifyBtn = document.getElementById('almagify-btn');
+const amalgifyBtn = document.getElementById('amalgify-btn');
 const trackList = document.getElementById('list');
 
 if (!code) {
@@ -13,11 +13,11 @@ if (!code) {
 } else {
   const accessToken = await getAccessToken(clientId, code);
 
-  almagifyBtn.addEventListener('click', async () => {
+  amalgifyBtn.addEventListener('click', async () => {
     let playlist = await fetchTracks(accessToken);
     const uris = urifier(playlist);
     removeSongs(accessToken, uris);
-    const newUris = await almagify(accessToken);
+    const newUris = await amalgify(accessToken);
     addSongs(accessToken, newUris);
     playlist = await fetchTracks(accessToken);
     populateSongs(playlist, accessToken);
@@ -31,7 +31,7 @@ async function populateSongs(playlist) {
   if (songs[0]) {
     songs.forEach((song) => {
       let newSong = document.createElement('li');
-      newSong.textContent = `${song.track.name} by ${song.track.album.artists[0].name}. URI: ${song.track.uri}`;
+      newSong.textContent = `${song.track.name} by ${song.track.album.artists[0].name}.`;
       trackList.appendChild(newSong);
     });
   }
