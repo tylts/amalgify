@@ -45,7 +45,7 @@ export async function getAccessToken(clientId, code) {
   params.append('client_id', clientId);
   params.append('grant_type', 'authorization_code');
   params.append('code', code);
-  params.append('redirect_uri', 'https://192.168.1.95:5173/');
+  params.append('redirect_uri', 'https://amalgify.netlify.app/');
   params.append('code_verifier', verifier);
 
   const result = await fetch('https://accounts.spotify.com/api/token', {
