@@ -1,4 +1,4 @@
-export async function almagify(token) {
+export async function amalgify(token) {
   // Pull URIs from each playlist
 
   let playlist1 = await listify(
@@ -13,15 +13,15 @@ export async function almagify(token) {
 
   // Pick 10 random songs from each and order them A B
 
-  const almagifyList = [];
+  const amalgifyList = [];
 
   for (let i = 0; i < 10; i++) {
-    almagifyList.push(playlist2[Math.floor(Math.random() * playlist2.length)]);
-    almagifyList.push(playlist1[Math.floor(Math.random() * playlist1.length)]);
+    amalgifyList.push(playlist2[Math.floor(Math.random() * playlist2.length)]);
+    amalgifyList.push(playlist1[Math.floor(Math.random() * playlist1.length)]);
   }
 
-  console.log(almagifyList);
-  return almagifyList;
+  console.log(amalgifyList);
+  return amalgifyList;
 }
 
 async function listify(url, token) {
@@ -57,7 +57,7 @@ async function listify(url, token) {
 async function fetchTracks(token, listURL) {
   const result = await fetch(`${listURL}`, {
     method: 'GET',
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` }
   });
 
   return await result.json();
