@@ -15,7 +15,7 @@ export async function amalgify(token) {
 
   const amalgifyList = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 20; i++) {
     amalgifyList.push(playlist2[Math.floor(Math.random() * playlist2.length)]);
     amalgifyList.push(playlist1[Math.floor(Math.random() * playlist1.length)]);
   }
